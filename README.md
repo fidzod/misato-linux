@@ -1,6 +1,6 @@
 # Misato Linux
 
-![Banner](banner.png)
+<img src="banner.png" width="622" alt="Banner">
 
 Misato Linux is a minimal and opinionated rice for void linux. Featur-
 ing a smooth and easy-to-use installer, tutorial, and other features
