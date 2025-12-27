@@ -28,7 +28,7 @@ echo "Configuring..."
 echo "misato" > /etc/hostname
 sed -i '/^#KEYMAP="es"/c\KEYMAP="uk"' /etc/rc.conf
 ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
-echo "root:misatolinux" | chpasswd
+echo -e "misatolinux\nmisatolinux" | passwd
 ln -s /etc/sv/dhcpcd /var/service/
 
 echo "Configuring bootloader..."
@@ -46,6 +46,3 @@ sleep 1
 exit
 umount -R /mnt
 shutdown -r now
-
-
-
