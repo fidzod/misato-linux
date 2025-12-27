@@ -30,14 +30,20 @@ declare CF_USERPASSWD=
 check_progress () { [[ ${CONFIG_STATUS["$1"]} ]] && echo "$1" || echo "*$1"; }
 
 st_keyboard () {
-     CF_KEYBOARD=$(gum choose \
+    KEYMAPS=$(find /usr/share/kbd/keymaps/ -type f \
+        -name "*.map.gz" -printf "%f\n" \
+        | sed 's/\.map\.gz$//' \
+        | sort
+    )
+
+    CF_KEYBOARD=$(gum choose \
         --header "Choose keyboard layout: " \
         --height=7 \
         --cursor.background="#b78db7" \
         --cursor.foreground="#d3d3d3" \
         --header.foreground="#b78db7" \
         --item.foreground="#d3d3d3" \
-        $(localectl list-keymaps)
+        $KEYMAPS
     )
 
     CONFIG_STATUS["$ST_KEYBOARD"]=true
