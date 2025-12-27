@@ -4,7 +4,7 @@
 
 source ./cfg_install.sh
 
-echo "Misato Installer for Void Linux, V.0.1.0"
+echo "Misato Installer for Void Linux, V.0.2.0"
 
 if [[ $CF_DISKS == "Automatic (Best effort)" ]]; then
     echo "Using best effort partitioning scheme..."
