@@ -29,7 +29,7 @@ REPO=https://repo-default.voidlinux.org/current/musl
 ARCH=x86_64-musl
 mkdir -p /mnt/var/db/xbps/keys
 cp /var/db/xbps/keys/* /mnt/var/db/xbps/keys/
-XBPS_ARCH=$ARCH xbps-install -S -r /mnt -R "$REPO" base-system
+XBPS_ARCH=$ARCH xbps-install -Sy -r /mnt -R "$REPO" base-system
 
 echo "Generating fstab..."
 xgenfstab -U /mnt > /mnt/etc/fstab
@@ -41,7 +41,7 @@ xchroot /mnt /bin/bash -c "
     ln -sf $CF_TIME /etc/localtime
     echo -e \"$CF_PASSWD\n$CF_PASSWD\" | passwd
     ln -s /etc/sv/dhcpcd /var/service/
-    xbps-install -S grub-x86_64-efi
+    xbps-install -Sy grub-x86_64-efi
     grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=\"Misato\"
     xbps-reconfigure -fa
     useradd -m -g wheel $CF_USERNAME
