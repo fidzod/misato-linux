@@ -40,6 +40,5 @@ echo "2..."
 sleep 1
 echo "1..."
 sleep 1
-exit
 umount -R /mnt
 shutdown -r now
