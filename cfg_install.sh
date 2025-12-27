@@ -181,6 +181,8 @@ gum pager --height=14 --width=60 <<EOF
 # Misato Linux Configuration #
 # ========================== #
 
+# (press `esc` or `q` to proceed with installation.)
+
 CF_KEYBOARD=$CF_KEYBOARD
 CF_HOSTNAME=$CF_HOSTNAME
 CF_TIME=$CF_TIME

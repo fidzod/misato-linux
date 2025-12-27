@@ -1,6 +1,8 @@
 #!/bin/bash
-# Todo
-# Use gum log
+# # Todo
+# - Use gum log instead of echo for formatted logs
+# - In cfg_install give an option to preview config
+# and then edit/proceed with confirm
 
 source ./cfg_install.sh
 
@@ -45,7 +47,7 @@ xchroot /mnt /bin/bash -c "
     grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=\"Misato\"
     xbps-reconfigure -fa
     useradd -m -g wheel $CF_USERNAME
-    echo -e \"$CF_USERPASSWD\n$CF_USERPASSWD\" | passwd
+    echo -e \"$CF_USERPASSWD\n$CF_USERPASSWD\" | passwd $CF_USERNAME
 "
 
 echo "Installation complete!"
