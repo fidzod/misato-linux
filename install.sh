@@ -2,7 +2,7 @@
 echo "Misato Installer for Void Linux, V.0.1.0"
 
 echo "Partitioning disk /dev/sda..."
-echo "label: gpt\n1G,1G,U\n,,L" | sfdisk /dev/sda
+echo -e "label: gpt\n1G,1G,U\n,,L" | sfdisk /dev/sda
 
 echo "Creating filesystems..."
 mkfs.vfat /dev/sda1
@@ -22,19 +22,16 @@ echo "Generating fstab..."
 xgenfstab -U /mnt > /mnt/etc/fstab
 
 echo "Entering chroot..."
-xchroot /mnt /bin/bash
-
-echo "Configuring..."
-echo "misato" > /etc/hostname
-sed -i '/^#KEYMAP="es"/c\KEYMAP="uk"' /etc/rc.conf
-ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
-echo -e "misatolinux\nmisatolinux" | passwd
-ln -s /etc/sv/dhcpcd /var/service/
-
-echo "Configuring bootloader..."
-xbps-install -S grub-x86_64-efi
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Misato"
-xbps-reconfigure -fa
+xchroot /mnt /bin/bash -c "
+    echo 'misato' > /etc/hostname
+    sed -i '/^#KEYMAP=\"es\"/c\KEYMAP=\"uk\"' /etc/rc.conf
+    ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
+    echo -e \"misatolinux\nmisatolinux\" | passwd
+    ln -s /etc/sv/dhcpcd /var/service/
+    xbps-install -S grub-x86_64-efi
+    grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=\"Misato\"
+    xbps-reconfigure -fa
+"
 
 echo "Installation complete!"
 echo "Rebooting in 3..."
